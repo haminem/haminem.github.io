@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hundthus</title>
+</head>
+<body>
+    <h1>usage of 100,000yen</h1>
+    <input type="text" id="Name">
+    <input type="number" id="Price">
+    <input type="button" value="追加" onclick="additem()">
+
+    <p id="output"></p>
+
+    <input type="button" value="合計" onclick="accounting()">
+
+    <p id="accountput"></p>
+
+    <script>
+      var namelist = [];
+      var pricelist = [];
+      function additem(){
+
+        if(document.getElementById("Name").value == "" || document.getElementById("Price").value == "") {
+          alert("未入力の項目があります")
+        }　else {
+
+          var Name = document.getElementById("Name");
+          var Price = document.getElementById("Price");
+          var output = document.getElementById("output");
+            
+          namelist.push(Name.value);
+          pricelist.push(Price.value);
+
+
+
+          output.innerHTML = "";
+
+          var i = 0;
+          while(i < namelist.length){
+            output.innerHTML += namelist[i] + " " + pricelist[i] + " " + "<input type=number name=piece value=0>" + "<br>";
+            i++;
+          }
+        }
+      }
+      function accounting(){
+        var accountput = document.getElementById("accountput");
+        var account = document.getElementsByName("piece");
+
+        var sum = 100000;
+        var U = 0;
+        while(U < account.length){
+          var ans = 0;
+          ans = parseInt(account[U].value) * pricelist[U]
+          sum -= ans;
+          U++;
+        }
+        accountput.innerHTML = sum;
+      }
+    </script>
+</body>
+</html>
